@@ -50,7 +50,7 @@ service.interceptors.response.use(
   },
   error => {
     // for debug
-    console.log('error:' + error)
+    console.log(error)
     Message({
       message: error.message,
       type: 'error',

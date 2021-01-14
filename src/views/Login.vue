@@ -23,6 +23,7 @@
           ref="password"
           v-model="loginForm.password"
           placeholder="请输入密码"
+          @keyup.enter.native="submitLogin"
         ></el-input>
       </el-form-item>
       <el-form-item>
@@ -30,7 +31,8 @@
           type="primary"
           style="width: 100%"
           @click="submitLogin"
-          >登录</el-button
+        >登录
+        </el-button
         >
       </el-form-item>
     </el-form>
@@ -38,7 +40,7 @@
 </template>
 
 <script>
-import { startLoading, endLoading } from '@/utils/loading'
+import {startLoading, endLoading} from '@/utils/loading'
 
 export default {
   name: 'Login',
@@ -50,9 +52,9 @@ export default {
       },
       loginRules: {
         username: [
-          { required: true, message: '请输入用户名', trigger: 'blur' }
+          {required: true, message: '请输入用户名', trigger: 'blur'}
         ],
-        password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
+        password: [{required: true, message: '请输入密码', trigger: 'blur'}]
       }
     }
   },
@@ -64,7 +66,7 @@ export default {
           this.$store
             .dispatch('login', this.loginForm)
             .then(() => {
-              // this.$route.query获取路径后的参数redirect
+              // this.$route.query 获取路径后的参数 redirect
               let path = this.$route.query.redirect
               this.$router.push(path === undefined ? '/' : path)
               endLoading()
@@ -73,13 +75,13 @@ export default {
               endLoading()
             })
         } else {
-          console.log('提交失败！！！')
           return false
         }
       })
     }
   },
-  created () {},
+  created () {
+  },
   mounted () {
     if (this.loginForm.username === '') {
       this.$refs.username.focus()
@@ -87,7 +89,8 @@ export default {
       this.$refs.password.focus()
     }
   },
-  destroyed () {}
+  destroyed () {
+  }
 }
 </script>
 
