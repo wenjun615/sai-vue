@@ -12,7 +12,8 @@ export default new Vuex.Store({
     name: '',
     icon: '',
     roles: [],
-    routes: []
+    routes: [],
+    addRoutes: []
   },
   mutations: {
     SET_TOKEN (state, token) {
@@ -28,7 +29,8 @@ export default new Vuex.Store({
       state.roles = roles
     },
     SET_ROUTES (state, routes) {
-      // concat() 用于连接两个或多个数组
+      state.addRoutes = routes
+      // concat() 用于连接两个或多个数组，不改变原有数组
       state.routes = constantRoutes.concat(routes)
     }
   },
@@ -106,3 +108,27 @@ export default new Vuex.Store({
   },
   modules: {}
 })
+
+function filterAsyncRoutes (routes, roles) {
+  const res = []
+  routes.forEach(route => {
+    const temp = {...route}
+    if (hasPermission(temp, roles)) {
+      if (temp.children) {
+        temp.children = filterAsyncRoutes(temp.children, roles)
+      }
+      res.push(temp)
+    }
+  })
+  return res
+}
+
+function hasPermission (route, roles) {
+  if (route.meta && route.meta.roles) {
+    // some() 检测数组元素是否满足指定条件，若满足则返回 true，并且剩下的元素不再执行检测，若没有满足条件的元素，则返回 false。
+    return roles.some(role => route.meta.roles.includes(role))
+  } else {
+    // 不需要角色权限的路由
+    return true
+  }
+}

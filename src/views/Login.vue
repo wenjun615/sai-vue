@@ -68,7 +68,8 @@ export default {
             .then(() => {
               // this.$route.query 获取路径后的参数 redirect
               let path = this.$route.query.redirect
-              this.$router.push(path === undefined ? '/' : path)
+              this.$router.push(path === undefined ? '/' : path).catch(() => {
+              })
               endLoading()
             })
             .catch(() => {

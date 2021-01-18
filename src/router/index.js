@@ -32,12 +32,6 @@ export const constantRoutes = [
   }
 ]
 
-const router = new VueRouter({
-  constantRoutes
-})
-
-export default router
-
 // 异步挂载的路由，根据权限动态加载的路由
 export const asyncRoutes = [
   {
@@ -104,3 +98,9 @@ export const asyncRoutes = [
     hidden: true
   }
 ]
+
+const router = new VueRouter({
+  routes: constantRoutes
+})
+
+export default router
