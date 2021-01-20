@@ -15,7 +15,9 @@
           ref="username"
           v-model="loginForm.username"
           placeholder="请输入用户名"
-        ></el-input>
+        >
+          <i slot="prefix" style="font-size: 20px" class="el-icon-user"></i>
+        </el-input>
       </el-form-item>
       <el-form-item prop="password">
         <span class="svg-container"></span>
@@ -24,7 +26,10 @@
           v-model="loginForm.password"
           placeholder="请输入密码"
           @keyup.enter.native="submitLogin"
-        ></el-input>
+          show-password
+        >
+          <i slot="prefix" style="font-size: 20px" class="el-icon-lock"></i>
+        </el-input>
       </el-form-item>
       <el-form-item>
         <el-button

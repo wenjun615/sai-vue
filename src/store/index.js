@@ -73,6 +73,7 @@ export default new Vuex.Store({
             commit('SET_NAME', '')
             commit('SET_ICON', '')
             commit('SET_ROLES', [])
+            commit('SET_ROUTES', [])
             removeToken()
             resolve()
           })
